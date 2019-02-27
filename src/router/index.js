@@ -15,6 +15,12 @@ const Progress = (resolve) => {
   })
 }
 
+const Remind = (resolve) => {
+  import('views/remind').then((module) => {
+    resolve(module)
+  })
+}
+
 export default new Router({
   routes: [
     {
@@ -28,6 +34,10 @@ export default new Router({
     {
       path: '/progress',
       component: Progress
+    },
+    {
+      path: '/remind',
+      component: Remind
     },
   ]
 })
