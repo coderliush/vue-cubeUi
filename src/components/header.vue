@@ -26,13 +26,15 @@ export default {
 <style scoped lang="less">
 @import '~common/style/variable';
   .header {
+    font-size: @font-bigger;
     margin-bottom: 10px;
     padding: 16px;
     text-align: center;
     background: @green;
     color: #fff;
     .back {
-      float: left
+      position: absolute;
+      left: 20px;
     }
   }
 </style>

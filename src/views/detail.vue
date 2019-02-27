@@ -68,15 +68,15 @@ export default {
     font-size: @font-normal;
     .panel {
       margin: 0 10px 12px 10px;
-      padding: 0 8px;
       border: 1PX solid @border-color;
       background: #fff;
       .panel-title {
-        margin: 8px 0;
-        padding-left: 6px;
+        margin: 8px 0 8px 8px;
+        padding-left: 3px;
         border-left: 3PX solid @green;
       }
       .content {
+        padding-left: 8px;
         border-top: 1px solid @border-color;
         p {
           margin: 6px 0;

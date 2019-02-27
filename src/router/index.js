@@ -9,6 +9,12 @@ const Detail = (resolve) => {
   })
 }
 
+const Progress = (resolve) => {
+  import('views/progress').then((module) => {
+    resolve(module)
+  })
+}
+
 export default new Router({
   routes: [
     {
@@ -18,6 +24,10 @@ export default new Router({
     {
       path: '/detail',
       component: Detail
+    },
+    {
+      path: '/progress',
+      component: Progress
     },
   ]
 })
