@@ -6,7 +6,7 @@
         <div class="content">
           <div class="item">
             <p>客户姓名：</p>
-            <p>张三（男）</p>
+            <p>{{cutSignInfo.cutName}}({{cutSignInfo.cutSex}})</p>
           </div>
           <div class="item">
             <p>手机号：</p>
@@ -14,59 +14,59 @@
           </div>
           <div class="item">
             <p>证件类型：</p>
-            <p>身份证</p>
+            <p>{{cutSignInfo.cutNoType}}</p>
           </div>
           <div class="item">
             <p>证件信息：</p>
-            <p>111111</p>
+            <p>{{cutSignInfo.cutNo}}</p>
           </div>
           <div class="item">
             <p>证件有效期：</p>
-            <p>2018</p>
+            <p>{{cutSignInfo.cutNoTypeValidity}}</p>
           </div>
           <div class="item">
             <p>签约日期：</p>
-            <p>2018</p>
+            <p>{{cutSignInfo.signDate}}</p>
           </div>
           <div class="item">
             <p>入住日期：</p>
-            <p>2018</p>
+            <p>{{cutSignInfo.checkInDate}}</p>
           </div>
           <div class="item">
             <p>签约服务中心：</p>
-            <p>1111</p>
+            <p>{{cutSignInfo.signServeCenter}}</p>
           </div>
           <div class="item">
             <p>签约地址：</p> 
-            <p>1111</p>
+            <p>{{cutSignInfo.signAddress}}</p>
           </div>
           <div class="item">
             <p>房租单价（普通）：</p>
-            <p>1111</p>
+            <p>{{cutSignInfo.signRentPrice}}</p>
           </div>
           <div class="item">
             <p>房租单价（VIP）：</p>  
-            <p>111</p>
+            <p>{{cutSignInfo.signRentPriceVIP}}</p>
           </div>
           <div class="item">
             <p>调价劵：</p>
-            <p>111</p>
+            <p>{{cutSignInfo.djustPriceTicket}}</p>
           </div>
           <div class="item">
             <p>押金单价：</p>
-            <p>dddd</p>
+            <p>{{cutSignInfo.pledgePrice}}</p>
           </div>
           <div class="item">
             <p>VIP补贴单价：</p>
-            <p>1111</p>
+            <p>{{cutSignInfo.allowanceVIP}}</p>
           </div>
           <div class="item">
             <p>合同编号：</p>
-            <p>2222</p>
+            <p>{{cutSignInfo.contractNo}}</p>
           </div>
           <div class="item">
             <p>签约房管员：</p>
-            <p>签约房管员</p>
+            <p>{{cutSignInfo.signFGY}}</p>
           </div>
         </div>
       </div>
@@ -76,19 +76,19 @@
         <div class="content">
           <div class="item">
             <p>分期类型：</p>
-            <p>dddd</p>
+            <p>{{loanInfo.loanType}}</p>
           </div>
           <div class="item">
             <p>分期期限：</p>
-            <p>111</p>
+            <p>{{loanInfo.loanTimes}}</p>
           </div>
           <div class="item">
             <p>申请金额：</p>
-            <p>111</p>
+            <p>{{loanInfo.applyPrice}}</p>
           </div>
           <div class="item">
             <p>可申请分期金额：</p>
-            <p>111111</p>
+            <p>{{loanInfo.applyPassPrice}}</p>
           </div>
         </div>
       </div>
@@ -98,35 +98,35 @@
         <div class="content">
           <div class="item">
             <p>第一责任人：</p>
-            <p>111</p>
+            <p>{{managerInfo.firstManagerName}}</p>
           </div>
           <div class="item">
             <p>岗位：</p>
-            <p>eeee</p>
+            <p>{{managerInfo.firstManagerPosition}}</p>
           </div>
           <div class="item">
             <p>所在服务中心：</p>
-            <p></p>
+            <p>{{managerInfo.firstManagerServeCenterName}}</p>
           </div>
           <div class="item">
             <p>所在分公司：</p>
-            <p>111</p>
+            <p>{{managerInfo.firstManagerCompanyName}}</p>
           </div>
           <div class="item">
             <p>第二责任人：</p>
-            <p>xxxx</p>
+            <p>{{managerInfo.secondManagerName}}</p>
           </div>
           <div class="item">
             <p>岗位：</p>
-            <p>11111</p>
+            <p>{{managerInfo.secondManagerPosition}}</p>
           </div>
           <div class="item">
             <p>所在服务中心：</p>
-            <p>ddd</p>
+            <p>{{managerInfo.secondManagerServeCenterName}}</p>
           </div>
           <div class="item">
             <p>所在分公司：</p>
-            <p>dddd</p>
+            <p>{{managerInfo.secondManagerCompanyName}}</p>
           </div>
         </div>
       </div>
@@ -135,13 +135,24 @@
 
 <script type="text/ecmascript-6">
 import PublicHeader from 'components/header'
+import { detail } from 'services/api'
 export default {
   name: '',
   data() {
-    return {}
+    return {
+      cutSignInfo: {},
+      loanInfo: {},
+      managerInfo: {},
+    }
   },
   components: {
     PublicHeader
+  },
+  async mounted() {
+    const res = await this.$http.get(detail)
+    this.cutSignInfo = res.cutSignInfo
+    this.loanInfo = res.loanInfo
+    this.managerInfo = res.managerInfo
   }
 }
 </script>

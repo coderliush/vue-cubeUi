@@ -10,6 +10,7 @@ module.exports = {
     config.resolve.alias
       .set('views', resolve('src/views'))
       .set('common', resolve('src/common'))
+      .set('services', resolve('src/services'))
       .set('components', resolve('src/components'))
   },
 
