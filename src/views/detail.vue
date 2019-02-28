@@ -4,46 +4,130 @@
       <div class="panel">
         <div class="panel-title">客户及签约信息</div>
         <div class="content">
-          <p>客户姓名：</p>
-          <p>手机号：</p>
-          <p>证件类型：</p>
-          <p>证件信息：</p>
-          <p>证件有效期：</p>
-          <p>签约日期：</p>
-          <p>入住日期：</p>
-          <p>签约服务中心：</p>
-          <p>签约地址：</p>
-          <p>房租单价（普通）：</p>
-          <p>房租单价（VIP）：</p>
-          <p>调价劵：</p>
-          <p>押金单价：</p>
-          <p>VIP补贴单价：</p>
-          <p>合同编号：</p>
-          <p>签约房管员：</p>
+          <div class="item">
+            <p>客户姓名：</p>
+            <p>张三（男）</p>
+          </div>
+          <div class="item">
+            <p>手机号：</p>
+            <p class="phone"><img src="../common/image/phone-2x.png" alt=""><span>拨打电话</span></p>
+          </div>
+          <div class="item">
+            <p>证件类型：</p>
+            <p>身份证</p>
+          </div>
+          <div class="item">
+            <p>证件信息：</p>
+            <p>111111</p>
+          </div>
+          <div class="item">
+            <p>证件有效期：</p>
+            <p>2018</p>
+          </div>
+          <div class="item">
+            <p>签约日期：</p>
+            <p>2018</p>
+          </div>
+          <div class="item">
+            <p>入住日期：</p>
+            <p>2018</p>
+          </div>
+          <div class="item">
+            <p>签约服务中心：</p>
+            <p>1111</p>
+          </div>
+          <div class="item">
+            <p>签约地址：</p> 
+            <p>1111</p>
+          </div>
+          <div class="item">
+            <p>房租单价（普通）：</p>
+            <p>1111</p>
+          </div>
+          <div class="item">
+            <p>房租单价（VIP）：</p>  
+            <p>111</p>
+          </div>
+          <div class="item">
+            <p>调价劵：</p>
+            <p>111</p>
+          </div>
+          <div class="item">
+            <p>押金单价：</p>
+            <p>dddd</p>
+          </div>
+          <div class="item">
+            <p>VIP补贴单价：</p>
+            <p>1111</p>
+          </div>
+          <div class="item">
+            <p>合同编号：</p>
+            <p>2222</p>
+          </div>
+          <div class="item">
+            <p>签约房管员：</p>
+            <p>签约房管员</p>
+          </div>
         </div>
       </div>
 
       <div class="panel">
         <div class="panel-title">贷款信息</div>
         <div class="content">
-          <p>分期类型：</p>
-          <p>分期期限：</p>
-          <p>申请金额：</p>
-          <p>可申请分期金额：</p>
+          <div class="item">
+            <p>分期类型：</p>
+            <p>dddd</p>
+          </div>
+          <div class="item">
+            <p>分期期限：</p>
+            <p>111</p>
+          </div>
+          <div class="item">
+            <p>申请金额：</p>
+            <p>111</p>
+          </div>
+          <div class="item">
+            <p>可申请分期金额：</p>
+            <p>111111</p>
+          </div>
         </div>
       </div>
 
       <div class="panel">
         <div class="panel-title">责任人信息</div>
         <div class="content">
-          <p>第一责任人：</p>
-          <p>第一责任人岗位：</p>
-          <p>第一责任人所在服务中心：</p>
-          <p>第一责任人所在分公司：</p>
-          <p>第二责任人：</p>
-          <p>第二责任人岗位：</p>
-          <p>第二责任人所在服务中心：</p>
-          <p>第二责任人所在分公司：</p>
+          <div class="item">
+            <p>第一责任人：</p>
+            <p>111</p>
+          </div>
+          <div class="item">
+            <p>岗位：</p>
+            <p>eeee</p>
+          </div>
+          <div class="item">
+            <p>所在服务中心：</p>
+            <p></p>
+          </div>
+          <div class="item">
+            <p>所在分公司：</p>
+            <p>111</p>
+          </div>
+          <div class="item">
+            <p>第二责任人：</p>
+            <p>xxxx</p>
+          </div>
+          <div class="item">
+            <p>岗位：</p>
+            <p>11111</p>
+          </div>
+          <div class="item">
+            <p>所在服务中心：</p>
+            <p>ddd</p>
+          </div>
+          <div class="item">
+            <p>所在分公司：</p>
+            <p>dddd</p>
+          </div>
         </div>
       </div>
     </div>
@@ -71,21 +155,52 @@ export default {
       border: 1PX solid @color-line;
       background: #fff;
       .panel-title {
-        margin: 8px 0 8px 8px;
-        padding-left: 3px;
+        display: flex;
+        justify-content: space-between;
+        margin: 13px 0 13px 8px;
+        padding-left: 6px;
         border-left: 3PX solid @green;
+        > p {
+          font-size: @font-smaller;
+          color: @color-sup;
+          position: relative;
+          top: 2px;
+          span {
+            color: @yellow;
+          }
+        }
       }
       .content {
-        padding-left: 8px;
+        padding: 0 16px;
         border-top: 1px solid @color-line;
+        .item {
+          display: flex;
+          p:nth-child(1) {
+            color: @color-sup;
+            min-width: 160px;
+          }
+          .phone {
+            display: flex;
+            align-items: center;
+            color: @yellow;
+            text-decoration: underline;
+            img {
+              width: 16px;
+              margin-right: 4px;
+            }
+          }
+          .red {
+            color: red;
+          }
+        }
         p {
-          margin: 6px 0;
+          padding: 13px 0;
+          border-bottom: 1PX solid @panel-border;
         }
       }
     }
   }
 </style>
-
 
 
 
