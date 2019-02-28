@@ -2,22 +2,19 @@
   <div class="wrapper">
     <public-header title="10.1.2 申请进度"></public-header>
     <div class="panel">
-      <div class="panel-title">责任人偏差：</div>
+      <div class="panel-title">查看进度：</div>
       <div class="content">
-        <div class="item">
-          <div class="time">2018-11-12</div>
-          <div class="ball"></div>
-          <div class="text">【待申请】</div>
+        <div class="time">
+          <p>2018/11/12</p>
         </div>
-        <div class="item">
-          <div class="time">2018-11-12</div>
-          <div class="ball"></div>
-          <div class="text">【待申请】</div>
+
+        <div class="status">
+          <img src="../common/image/done-2x.png" alt="">
         </div>
-        <div class="item">
-          <div class="time">2018-11-12</div>
-          <div class="ball"></div>
-          <div class="text">【待申请】</div>
+
+        <div class="text">
+          <p>待申请</p>
+          <p>责任人：张</p>
         </div>
       </div>
     </div>
@@ -47,34 +44,51 @@ export default {
       border: 1PX solid @color-line;
       background: #fff;
       .panel-title {
-        margin: 8px 0 8px 8px;
-        padding-left: 3px;
-        border-left: 3PX solid @green;
-        color: @grey;
+        display: flex;
+        justify-content: space-between;
+        margin: 13px 0 13px 8px;
+        padding-left: 6px;
+        border-left: 3PX solid @red;
+        > p {
+          font-size: @font-smaller;
+          color: @color-sup;
+          position: relative;
+          top: 2px;
+          span {
+            color: @yellow;
+          }
+        }
       }
       .content {
-        padding-left: 8px;
+        display: flex;
+        padding: 0 16px;
         border-top: 1px solid @color-line;
-        .item {
-          height: 44px;
+        padding-top: 10px;
+        div {
           display: flex;
           align-items: center;
-          .ball {
+          height: 60px;
+        }
+        .time {
+          padding-right: 12px;
+          font-size: @font-smaller;
+          color: @color-sup;
+          border-right: 1PX solid @color-line;
+        }
+        .status {
+          img {
+            width: 18px;
+            height: 18px;
             position: relative;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 1px solid @grey;
-            &:before {
-              content: '|';
-              position: absolute;
-              left: 14px;
-              top: -15px;
-            }
+            left: -9px;
           }
-
+        }
+        .text {
+          flex-direction: column;
+          justify-content: flex-start;
         }
       }
     }
   }
 </style>
+
