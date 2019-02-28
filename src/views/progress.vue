@@ -44,7 +44,7 @@ export default {
     font-size: @font-normal;
     .panel {
       margin: 0 10px 12px 10px;
-      border: 1PX solid @border-color;
+      border: 1PX solid @color-line;
       background: #fff;
       .panel-title {
         margin: 8px 0 8px 8px;
@@ -54,7 +54,7 @@ export default {
       }
       .content {
         padding-left: 8px;
-        border-top: 1px solid @border-color;
+        border-top: 1px solid @color-line;
         .item {
           height: 44px;
           display: flex;

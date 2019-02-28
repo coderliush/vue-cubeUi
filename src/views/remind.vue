@@ -1,41 +1,85 @@
 <template>
   <div class="wrapper">
-    <public-header title="10.1.4业务提醒查看"></public-header>
+    <public-header title="业务提醒查看"></public-header>
     <div class="panel">
       <div class="panel-title">不满足条件</div>
       <div class="content">
-        <p>未退货：</p>
-        <p>未签华瑞协议：</p>
+        <div class="item">
+          <p>未退货</p>
+          <p class="red">此房间上个客户未退贷</p>
+        </div>
+        <div class="item">
+          <p>未签华瑞协议</p>
+          <p class="red">华瑞协议未签</p>
+        </div>
       </div>
     </div>
 
     <div class="panel">
-      <div class="panel-title">责任人偏差：</div>
+      <div class="panel-title">责任人偏差</div>
       <div class="content">
-        <p>第一责任人：</p>
-        <p>第一责任人岗位：</p>
-        <p>第一责任人所在服务中心：</p>
-        <p>第一责任人所在分公司：</p>
-        <p>第二责任人：</p>
-        <p>第二责任人岗位：</p>
-        <p>第二责任人所在服务中心：</p>
-        <p>第二责任人所在分公司：</p>
+        <img src="../common/image/first-people-2x.png" alt="">
+        <div class="item">
+          <p>第一责任人</p>
+          <p>张三</p>
+        </div>
+        <div class="item">
+          <p>岗位</p>
+          <p>服务中心经理</p>
+        </div>
+        <div class="item">
+          <p>所在服务中心</p>
+          <p>第一服务中心</p>
+        </div>
+        <div class="item">
+          <p>所在分公司</p>
+          <p>徐汇分公司</p>
+        </div>
+        <img src="../common/image/second-people-2x.png" alt="">
+        <div class="item">
+          <p>第二责任人</p>
+          <p>李四</p>
+        </div>
+        <div class="item">
+          <p>岗位</p>
+          <p>服务中心经理</p>
+        </div>
+        <div class="item">
+          <p>所在服务中心</p>
+          <p>第--0服务中心</p>
+        </div>
+        <div class="item">
+          <p>所在分公司</p>
+          <p>杭州分公司</p>
+        </div>
       </div>
     </div>
 
     <div class="panel">
-      <div class="panel-title">待申请告警（入住日期为始，超过告警设置天数未办理）</div>
+      <div class="panel-title">待申请告警
+        <p>（入住日期为始，超过告警设置天数<span>X</span>未办理）</p>
+      </div>
       <div class="content">
-        <p>客户入住日期：</p>
-        <p>已超期天数：</p>
+        <div class="item">
+          <p>客户入住日期：</p>
+          <p class="red">已超期天数</p>
+        </div>
       </div>
     </div>
 
     <div class="panel">
-      <div class="panel-title">待申请超时（入住日期为始，超过告警设置天数未办理）</div>
+      <div class="panel-title">待申请超时
+        <p>（入住日期为始，超过告警设置天数<span>X</span>未办理）</p>
+      </div>
       <div class="content">
-        <p>客户入住日期：</p>
-        <p>已超期天数：</p>
+        <div class="item">
+          <p>客户入住日期：</p>
+          <p>2019-02-10</p>
+        </div>
+        <div class="item">
+          <p>已超期天数：</p>
+          <p class="red">1天</p>
+        </div>
       </div>
     </div>
   </div>
@@ -60,19 +104,41 @@ export default {
     font-size: @font-normal;
     .panel {
       margin: 0 10px 12px 10px;
-      border: 1PX solid @border-color;
+      border: 1PX solid @color-line;
       background: #fff;
       .panel-title {
-        margin: 8px 0 8px 8px;
-        padding-left: 3px;
+        display: flex;
+        justify-content: space-between;
+        margin: 13px 0 13px 8px;
+        padding-left: 6px;
         border-left: 3PX solid @green;
-        color: @grey;
+        > p {
+          font-size: @font-smaller;
+          color: @color-sup;
+          position: relative;
+          top: 2px;
+          span {
+            color: @yellow;
+          }
+        }
       }
       .content {
-        padding-left: 8px;
-        border-top: 1px solid @border-color;
+        img {
+          width: 100px;
+          margin-top: 10px;
+        }
+        padding: 0 16px;
+        border-top: 1px solid @color-line;
+        .item {
+          display: flex;
+          justify-content: space-between;
+          .red {
+            color: red;
+          }
+        }
         p {
-          margin: 6px 0;
+          padding: 13px 0;
+          border-bottom: 1PX solid @panel-border;
         }
       }
     }

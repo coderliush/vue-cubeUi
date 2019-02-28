@@ -1,9 +1,10 @@
 <template>
   <div class="header">
     <span class="back">
-      <i class="cubeic-back"></i>返回
+      <i class="cubeic-back"></i>
+      <span>返回</span>
     </span>
-    <span>{{title}}</span>
+    <span class="title">{{title}}</span>
   </div>
 </template>
 
@@ -26,15 +27,26 @@ export default {
 <style scoped lang="less">
 @import '~common/style/variable';
   .header {
-    font-size: @font-bigger;
+    font-size: @font-bigger!important;
     margin-bottom: 10px;
-    padding: 16px;
+    padding: 18px;
     text-align: center;
     background: @green;
     color: #fff;
     .back {
       position: absolute;
-      left: 20px;
+      left: 12px;
+      display: flex;
+      align-items: center;
+      .cubeic-back::before {
+        font-size: 22px;
+      }
+      span {
+        font-size: 15px;
+      }
+    }
+    .title {
+      font-size: @font-bigger;
     }
   }
 </style>
