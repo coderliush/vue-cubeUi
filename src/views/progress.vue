@@ -41,7 +41,7 @@ export default {
     font-size: @font-normal;
     .panel {
       margin: 0 10px 12px 10px;
-      border: 1PX solid @color-line;
+      border: 1PX solid @border-deep;
       background: #fff;
       .panel-title {
         display: flex;
@@ -61,7 +61,7 @@ export default {
       }
       .content {
         display: flex;
-        border-top: 1px solid @color-line;
+        border-top: 1PX solid @border-light;
         padding: 10px 16px;
         div {
           display: flex;
@@ -72,7 +72,7 @@ export default {
           font-size: @font-smaller;
           align-items: center;
           color: @color-sup;
-          border-right: 1PX solid @color-line;
+          border-right: 1PX solid @border-deep;
         }
         .status {
           align-items: center;
@@ -86,6 +86,11 @@ export default {
         .text {
           flex-direction: column;
           justify-content: center;
+          border-bottom: 1PX solid @border-light;
+          flex: 1;
+          p:nth-child(1) {
+            margin-bottom: 4px;
+          }
         }
       }
     }

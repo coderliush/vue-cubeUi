@@ -152,7 +152,7 @@ export default {
     font-size: @font-normal;
     .panel {
       margin: 0 10px 12px 10px;
-      border: 1PX solid @color-line;
+      border: 1PX solid @border-light;
       background: #fff;
       .panel-title {
         display: flex;
@@ -171,8 +171,8 @@ export default {
         }
       }
       .content {
-        padding: 0 16px;
-        border-top: 1px solid @color-line;
+        padding: 10px 16px;
+        border-top: 1px solid @border-light;
         .item {
           display: flex;
           p:nth-child(1) {
@@ -194,8 +194,7 @@ export default {
           }
         }
         p {
-          padding: 13px 0;
-          border-bottom: 1PX solid @panel-border;
+          padding: 6px 0;
         }
       }
     }
