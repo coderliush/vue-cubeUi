@@ -61,21 +61,21 @@ export default {
       }
       .content {
         display: flex;
-        padding: 0 16px;
         border-top: 1px solid @color-line;
-        padding-top: 10px;
+        padding: 10px 16px;
         div {
           display: flex;
-          align-items: center;
           height: 60px;
         }
         .time {
           padding-right: 12px;
           font-size: @font-smaller;
+          align-items: center;
           color: @color-sup;
           border-right: 1PX solid @color-line;
         }
         .status {
+          align-items: center;
           img {
             width: 18px;
             height: 18px;
@@ -85,7 +85,7 @@ export default {
         }
         .text {
           flex-direction: column;
-          justify-content: flex-start;
+          justify-content: center;
         }
       }
     }
