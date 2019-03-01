@@ -3,9 +3,9 @@
     <public-header title="10.1.2 申请进度"></public-header>
     <div class="panel">
       <div class="panel-title">查看进度：</div>
-      <div class="content">
+      <div class="content" v-for="(item, index) in loanProgress" :key="index">
         <div class="time">
-          <p>2018/11/12</p>
+          <p>{{item.statusTime}}</p>
         </div>
 
         <div class="status">
@@ -13,8 +13,8 @@
         </div>
 
         <div class="text">
-          <p>待申请</p>
-          <p>责任人：张</p>
+          <p>{{item.statusName}}</p>
+          <p>{{item.statusManager}}</p>
         </div>
       </div>
     </div>
@@ -24,10 +24,17 @@
 
 <script type="text/ecmascript-6">
 import PublicHeader from 'components/header'
+import { progress } from 'services/api'
 export default {
   name: '',
   data() {
-    return {}
+    return {
+      loanProgress: [],
+    }
+  },
+  mounted() {
+    const res = await this.$http.post(progress, {loanId})
+    this.loanProgress = res.loanProgress
   },
   components: {
     PublicHeader

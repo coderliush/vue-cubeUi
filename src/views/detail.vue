@@ -149,7 +149,7 @@ export default {
     PublicHeader
   },
   async mounted() {
-    const res = await this.$http.get(detail)
+    const res = await this.$http.post(detail, {loanId})
     this.cutSignInfo = res.cutSignInfo
     this.loanInfo = res.loanInfo
     this.managerInfo = res.managerInfo

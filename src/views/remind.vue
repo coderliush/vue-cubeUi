@@ -21,36 +21,36 @@
         <img src="../common/image/first-people-2x.png" alt="">
         <div class="item">
           <p>第一责任人</p>
-          <p>张三</p>
+          <p>{{managerInfo.firstManagerName}}</p>
         </div>
         <div class="item">
           <p>岗位</p>
-          <p>服务中心经理</p>
+          <p>{{managerInfo.firstManagerPosition}}</p>
         </div>
         <div class="item">
           <p>所在服务中心</p>
-          <p>第一服务中心</p>
+          <p>{{managerInfo.firstManagerServeCenterName}}</p>
         </div>
         <div class="item">
           <p>所在分公司</p>
-          <p>徐汇分公司</p>
+          <p>{{managerInfo.firstManagerCompanyName}}</p>
         </div>
         <img src="../common/image/second-people-2x.png" alt="">
         <div class="item">
           <p>第二责任人</p>
-          <p>李四</p>
+          <p>{{managerInfo.secondManagerName}}</p>
         </div>
         <div class="item">
           <p>岗位</p>
-          <p>服务中心经理</p>
+          <p>{{managerInfo.secondManagerPosition}}</p>
         </div>
         <div class="item">
           <p>所在服务中心</p>
-          <p>第--0服务中心</p>
+          <p>{{managerInfo.secondManagerServeCenterName}}</p>
         </div>
         <div class="item">
           <p>所在分公司</p>
-          <p>杭州分公司</p>
+          <p>{{managerInfo.secondManagerCompanyName}}</p>
         </div>
       </div>
     </div>
@@ -63,6 +63,10 @@
         <div class="item">
           <p>客户入住日期：</p>
           <p class="red">已超期天数</p>
+        </div>
+        <div class="item">
+          <p>已超期天数：</p>
+          <p class="red">5天</p>
         </div>
       </div>
     </div>
@@ -87,10 +91,18 @@
 
 <script type="text/ecmascript-6">
 import PublicHeader from 'components/header'
+import {detail, remind} from 'services/api'
 export default {
   name: '',
   data() {
     return {}
+  },
+  mounted() {
+    const res = await this.$http.post(detail, {loanId})
+    const getSysCfgList = await this.$http.post(remind, {key: LOAN_WAIT_APPLY})
+    this.managerInfo = res.managerInfo
+    this.getSysCfgList = getSysCfgList
+    
   },
   components: {
     PublicHeader
