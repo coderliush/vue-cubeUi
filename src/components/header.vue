@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" @click="back">
     <span class="back">
       <i class="cubeic-back"></i>
       <span>返回</span>
@@ -19,6 +19,11 @@ export default {
   },
   data() {
     return {}
+  },
+  methods:{
+  back() {
+    window.fgyApp.back()
+    }
   },
   components: {}
 }

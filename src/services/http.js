@@ -68,16 +68,15 @@ axios.interceptors.response.use(response => {
 );
 
 const handleResult = (res) => {
-  if (res.status == 200) {
-    if (res.data.result) {
-      return res.data.data;
+  if (res.status === 200) {
+    if (res.data.result === 0) {
+      return res.data.data
+    } else {
+      throw res.data
     }
-    else {
-      throw res.data;
-    }
-
+  } else {
+    throw res
   }
-  throw res
 }
 
 var http = {

@@ -1,20 +1,20 @@
 <template>
   <div class="wrapper">
-    <public-header title="10.1.2 申请进度"></public-header>
+    <public-header title="申请进度"></public-header>
     <div class="panel">
-      <div class="panel-title">查看进度：</div>
-      <div class="content" v-for="(item, index) in loanProgress" :key="index">
+      <div class="panel-title">查看进度</div>
+      <div class="content" v-for="(item, index) in res" :key="index">
         <div class="time">
           <p>{{item.statusTime}}</p>
         </div>
 
         <div class="status">
-          <img src="../common/image/done-2x.png" alt="">
+          <img :src="item.src" alt="">
         </div>
 
         <div class="text">
           <p>{{item.statusName}}</p>
-          <p>{{item.statusManager}}</p>
+          <p>责任人：{{item.statusManager}}</p>
         </div>
       </div>
     </div>
@@ -24,17 +24,28 @@
 
 <script type="text/ecmascript-6">
 import PublicHeader from 'components/header'
-import { progress } from 'services/api'
+import api from 'services/api'
 export default {
   name: '',
   data() {
     return {
-      loanProgress: [],
+      res: [],
     }
   },
-  mounted() {
-    const res = await this.$http.post(progress, {loanId})
-    this.loanProgress = res.loanProgress
+  methods: {
+  },
+  async mounted() {
+    this.params = window.fgyApp ? JSON.parse(window.fgyApp.getParams()) : {
+      loanId: 245265,
+    }
+    this.res = await this.$http.post(api.progress, {loanId: this.params.loanId})
+    this.res.forEach((item, index) => {
+      if (!item.statusManager || item.statusManager === '-') {
+        item.src = require('../common/image/doing-2x.png')
+      } else {
+        item.src = require('../common/image/done-2x.png')
+      }
+    })
   },
   components: {
     PublicHeader
@@ -44,6 +55,11 @@ export default {
 
 <style scoped lang="less">
 @import '~common/style/variable';
+  .panel .content:nth-child(2) {
+    border-top: 1PX solid @border-light;
+    padding-top: 10px;
+  }
+
   .wrapper {
     font-size: @font-normal;
     .panel {
@@ -56,6 +72,7 @@ export default {
         margin: 13px 0 13px 8px;
         padding-left: 6px;
         border-left: 3PX solid @red;
+        font-weight: bold;
         > p {
           font-size: @font-smaller;
           color: @color-sup;
@@ -68,18 +85,21 @@ export default {
       }
       .content {
         display: flex;
-        border-top: 1PX solid @border-light;
-        padding: 10px 16px;
+        margin-top: -1PX;
         div {
           display: flex;
           height: 60px;
         }
         .time {
+          min-width: 100px;
           padding-right: 12px;
           font-size: @font-smaller;
           align-items: center;
           color: @color-sup;
           border-right: 1PX solid @border-deep;
+          p {
+            margin: 0 auto;
+          }
         }
         .status {
           align-items: center;
@@ -96,7 +116,7 @@ export default {
           border-bottom: 1PX solid @border-light;
           flex: 1;
           p:nth-child(1) {
-            margin-bottom: 4px;
+            margin-bottom: 6px;
           }
         }
       }

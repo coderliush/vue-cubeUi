@@ -14,14 +14,6 @@ module.exports = {
       .set('components', resolve('src/components'))
   },
 
-  devServer: {
-    // proxy: {
-    //   '/api': {
-    //     // target: 'http://172.16.0.148:20003'         // 测试
-    //   }
-    // }
-  },
-
   css: {
     loaderOptions: {
       stylus: {
@@ -38,5 +30,21 @@ module.exports = {
       postCompile: true,
       theme: true
     }
-  }
+  },
+
+  devServer: {    
+    proxy: {
+      '/api': {
+        target: 'http://qingketest.chinacloudapp.cn:30316',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''  
+        }
+      }
+    }
+  },
 }
+
+// http://qingketest.chinacloudapp.cn:30316/thirdprovider  测试
+
+// http://192.168.1.74 本地

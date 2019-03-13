@@ -1,88 +1,86 @@
 <template>
   <div class="wrapper">
     <public-header title="业务提醒查看"></public-header>
-    <div class="panel">
+    <div class="panel" v-if="showUnsatisfied">
       <div class="panel-title">不满足条件</div>
       <div class="content">
-        <div class="item">
-          <p>未退货</p>
-          <p class="red">此房间上个客户未退贷</p>
-        </div>
-        <div class="item">
-          <p>未签华瑞协议</p>
-          <p class="red">华瑞协议未签</p>
+        <div v-for="(key, value) in this.params.unsatisfiedCondition" :key="value">
+          <div class="item">
+            <p>{{value}}</p>
+            <p class="red">{{key.join()}}</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="panel">
+    <div class="panel" v-if="showPeople">
       <div class="panel-title">责任人偏差</div>
       <div class="content">
         <img src="../common/image/first-people-2x.png" alt="">
         <div class="item">
           <p>第一责任人</p>
-          <p>{{managerInfo.firstManagerName}}</p>
+          <p>{{params.firstManager}}</p>
         </div>
         <div class="item">
           <p>岗位</p>
-          <p>{{managerInfo.firstManagerPosition}}</p>
+          <p>{{params.firstManagerPosition}}</p>
         </div>
         <div class="item">
           <p>所在服务中心</p>
-          <p>{{managerInfo.firstManagerServeCenterName}}</p>
+          <p>{{params.firstManagerServeCenter}}</p>
         </div>
         <div class="item">
           <p>所在分公司</p>
-          <p>{{managerInfo.firstManagerCompanyName}}</p>
+          <p>{{params.firstManagerCompany}}</p>
         </div>
         <img src="../common/image/second-people-2x.png" alt="">
         <div class="item">
           <p>第二责任人</p>
-          <p>{{managerInfo.secondManagerName}}</p>
+          <p>{{params.secendManager}}</p>
         </div>
         <div class="item">
           <p>岗位</p>
-          <p>{{managerInfo.secondManagerPosition}}</p>
+          <p>{{params.secendManagerPosition}}</p>
         </div>
         <div class="item">
           <p>所在服务中心</p>
-          <p>{{managerInfo.secondManagerServeCenterName}}</p>
+          <p>{{params.secendManagerServeCenter}}</p>
         </div>
         <div class="item">
           <p>所在分公司</p>
-          <p>{{managerInfo.secondManagerCompanyName}}</p>
+          <p>{{params.secendManagerCompany}}</p>
         </div>
       </div>
     </div>
 
-    <div class="panel">
+    <div class="panel" v-if="showWarn">
       <div class="panel-title">待申请告警
-        <p>（入住日期为始，超过告警设置天数<span>X</span>未办理）</p>
+        <p>（入住日期为始，超过告警设置天数<span>{{this.warnDate}}</span>未办理）</p>
       </div>
       <div class="content">
         <div class="item">
           <p>客户入住日期：</p>
-          <p class="red">已超期天数</p>
+          <p>{{this.params.checkInDate}}</p>
         </div>
         <div class="item">
           <p>已超期天数：</p>
-          <p class="red">5天</p>
+          <p class="red">{{warnDelay}}</p>
         </div>
       </div>
     </div>
 
-    <div class="panel">
+    <div class="panel" v-if="showTimeOut">
       <div class="panel-title">待申请超时
-        <p>（入住日期为始，超过告警设置天数<span>X</span>未办理）</p>
+        <p>(入住日期为始，超过告警设置天数<span>{{this.timeoutDate}}</span>未办理)</p>
       </div>
       <div class="content">
         <div class="item">
           <p>客户入住日期：</p>
-          <p>2019-02-10</p>
+          <p>{{this.params.checkInDate}}</p>
         </div>
         <div class="item">
           <p>已超期天数：</p>
-          <p class="red">1天</p>
+          <p class="red">{{timeoutDelay}}天</p>
         </div>
       </div>
     </div>
@@ -91,24 +89,89 @@
 
 <script type="text/ecmascript-6">
 import PublicHeader from 'components/header'
-import {detail, remind} from 'services/api'
+import api from 'services/api'
 export default {
   name: '',
   data() {
-    return {}
+    return {
+      params: {},
+      showUnsatisfied: false,
+      showPeople: false,
+      showWarn: false,
+      showTimeOut: false,
+
+      warnDate: '',   // 设置多少天数未办理
+      timeoutDate: '',
+      warnDelay: '',  // 超时天数
+      timeoutDelay: null,
+
+    }
   },
-  mounted() {
-    const res = await this.$http.post(detail, {loanId})
-    const getSysCfgList = await this.$http.post(remind, {key: LOAN_WAIT_APPLY})
-    this.managerInfo = res.managerInfo
-    this.getSysCfgList = getSysCfgList
-    
+  methods: {
+    delayDay(date, dayNum) {
+      const oneDayStamp = 86400000
+      date = date.replace(/-/g, '/')
+      let startStamp = new Date(date).getTime()
+      let nowStamp = new Date().getTime()
+      let dayRes = (nowStamp - startStamp - oneDayStamp * dayNum) / oneDayStamp
+      return Math.floor(dayRes) 
+    }
+  },
+  async mounted() {
+    this.params = window.fgyApp ? JSON.parse(window.fgyApp.getParams()) :{
+			"unsatisfiedCondition": {
+        '视频一': ['录制一'],
+        '视频二': ['录制二', '第二项']
+      },
+			"firstManagerPosition": "销售",
+			"loanType": "浦发银行",
+			"bizRemindType": ["待申请超期", "不满足条件", "责任人偏差", "待申请告警"],
+			"cutNo": "220103198801308841",
+			"firstManager": "王威",
+			"checkInDate": "2019-02-20",
+			"firstManagerServeCenter": "第一服务中心（徐汇1组）",
+			"roomId": "15810",
+			"secendManagerPosition": "服务中心经理",
+			"cutSex": "女",
+			"secendManagerServeCenter": "第一服务中心（徐汇1组）",
+			"roomAddress": "上海市上海市闵行区颛兴路748弄109号202室C室2N",
+			"loanTimes": "24",
+			"cutId": "82323",
+			"secendManager": "钟辉辉",
+			"loanStatus": {
+				"name": "已拒绝",
+				"id": 20
+			},
+			"cutName": "严辨枫",
+			"firstManagerCompany": "徐汇分公司",
+			"cutPhone": "13330306009",
+			"secendManagerCompany": "徐汇分公司",
+			"loanId": "245265"
+    }
+
+    this.params.bizRemindType.forEach((item) => {
+      if (item === '不满足条件') { this.showUnsatisfied = true }
+      if (item === '责任人偏差') { this.showPeople = true }
+      if (item === '待申请超期') { this.showTimeOut = true }
+      if (item === '待申请告警') { this.showWarn = true }
+    })
+
+    const warnRes = await this.$http.post(api.remind, {key: 'WAIT_APPLY_WARNIN'}) 
+    const timeoutRes = await this.$http.post(api.remind, {key: 'WAIT_APPLY_TIMEOUT'}) 
+    if (warnRes.length !== 0) {
+      this.warnDate = warnRes[0].value
+      this.warnDelay = this.delayDay(this.params.checkInDate, this.warnDate)
+    }
+    if (timeoutRes.length !== 0) {
+      this.timeoutDate = timeoutRes[0].value 
+      this.timeoutDelay = this.delayDay(this.params.checkInDate, this.timeoutDate)
+    }
   },
   components: {
     PublicHeader
   }
 }
-</script>
+</script>  
 
 <style scoped lang="less">
 @import '~common/style/variable';
@@ -129,6 +192,7 @@ export default {
           color: @color-sup;
           position: relative;
           top: 2px;
+          right: 6px;
           span {
             color: @yellow;
           }
