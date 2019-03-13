@@ -34,13 +34,14 @@ module.exports = {
 
   devServer: {    
     proxy: {
-      '/api': {
+      '/thirdprovider': {
         target: 'http://qingketest.chinacloudapp.cn:30316',
         changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''  
-        }
-      }
+      },
+      '/commonprovider': {
+        target: 'http://qingketest.chinacloudapp.cn:30316',
+        changeOrigin: true,
+      },
     }
   },
 }

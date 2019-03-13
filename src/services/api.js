@@ -1,5 +1,5 @@
 export default {
-  progress: 'api/thirdprovider/fgy/loanManager/progress',
-  detail: 'api/thirdprovider/fgy/loanManager/detail',
-  remind: 'api/commonprovider/fgy/common/Sysconfig/getSysCfg',
+  progress: 'thirdprovider/fgy/loanManager/progress',
+  detail: 'thirdprovider/fgy/loanManager/detail',
+  remind: 'commonprovider/fgy/common/Sysconfig/getSysCfg',
 }
