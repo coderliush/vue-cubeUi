@@ -5,7 +5,8 @@
       <div class="panel-title">查看进度</div>
       <div class="content" v-for="(item, index) in res" :key="index">
         <div class="time">
-          <p>{{item.statusTime}}</p>
+          <p>{{item.statusTime ? item.statusTime.substring(0, 10) : item.statusTime}}</p>
+          <p>{{item.statusTime ? item.statusTime.substring(10) : null}}</p>
         </div>
 
         <div class="status">
@@ -59,7 +60,7 @@ export default {
   },
   async mounted() {
     this.params = window.fgyApp ? JSON.parse(window.fgyApp.getParams()) : {
-      loanId: 245462,
+      loanId: '245534',
     }
     const res = await this.$http.post(api.progress, {loanId: this.params.loanId})
     this.res = this.handle(res)
@@ -108,14 +109,20 @@ export default {
           height: 60px;
         }
         .time {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
           min-width: 100px;
           padding-right: 12px;
           font-size: @font-smaller;
-          align-items: center;
           color: @color-sup;
           border-right: 1PX solid @border-deep;
           p {
             margin: 0 auto;
+            &:nth-of-type(2) {
+              position: relative;
+              right: -7px;
+            }
           }
         }
         .status {
