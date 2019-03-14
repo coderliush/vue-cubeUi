@@ -33,19 +33,36 @@ export default {
     }
   },
   methods: {
+    handle(arr) {
+      for (let i = arr.length-1; i>=0; i--) {
+        const item = arr[i]
+        if (item.statusName === '已拒绝') {
+          item.src = require('../common/image/cross.png')
+        } else if (item.statusManager === '-') {
+          item.src = require('../common/image/no-pass.png')
+        } else if (item.statusManager) {
+          if (item.statusName === '待申请' || item.statusName === '二次申请') {
+            item.src = require('../common/image/no-pass.png')
+          } else {
+            item.src = require('../common/image/pass.png')
+          }
+
+          arr.forEach((ele, index) => {
+            if (index < i) {
+              ele.src = require('../common/image/pass.png')
+            }
+          })
+          return arr
+        }
+      }
+    }
   },
   async mounted() {
     this.params = window.fgyApp ? JSON.parse(window.fgyApp.getParams()) : {
-      loanId: 245265,
+      loanId: 245462,
     }
-    this.res = await this.$http.post(api.progress, {loanId: this.params.loanId})
-    this.res.forEach((item, index) => {
-      if (!item.statusManager || item.statusManager === '-') {
-        item.src = require('../common/image/doing-2x.png')
-      } else {
-        item.src = require('../common/image/done-2x.png')
-      }
-    })
+    const res = await this.$http.post(api.progress, {loanId: this.params.loanId})
+    this.res = this.handle(res)
   },
   components: {
     PublicHeader

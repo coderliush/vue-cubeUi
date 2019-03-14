@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <public-header title="详细查看"></public-header>
+    <public-header title="10.1.1 详情查看"></public-header>
     <div class="panel">
       <div class="panel-title">客户及签约信息</div>
       <div class="content">
@@ -10,7 +10,8 @@
         </div>
         <div class="item">
           <p>手机号：</p>
-          <p class="phone" @click="call"><img
+          <p v-if="isManager == 2">-</p>
+          <p v-else class="phone" @click="call"><img
               src="../common/image/phone-2x.png"
               alt=""
             ><span>拨打电话</span></p>
@@ -97,7 +98,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-title">贷款信息</div>
+      <div class="panel-title">责任人信息</div>
       <div class="content">
         <img src="../common/image/first-people-2x.png" alt="">
         <div class="item">
@@ -145,6 +146,7 @@ export default {
   name: "",
   data() {
     return {
+      isManager: null,
       params: {},
       cutSignInfo: {},
       loanInfo: {},
@@ -160,6 +162,8 @@ export default {
     PublicHeader
   },
   async mounted() {
+    this.isManager = window.fgyApp ? (JSON.parse(window.fgyApp.getUserInfo())).positionId : 2
+
     this.params = window.fgyApp ? JSON.parse(window.fgyApp.getParams()) : {
       loanId: '245265',
     }
